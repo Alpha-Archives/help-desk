@@ -1,4 +1,4 @@
-<h1 align="center">Help Desk /h1>
+<h1 align="center">Help Desk </h1>
 
 <p align="center">A specialised help desk for copmanies. A simple app to keep record and track IT department tasks and issues baked using React. Uses JSON-Server as a mock backend. Alot of backedn option to pic from but soon to use Mongo DB.</p>
 
