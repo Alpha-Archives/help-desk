@@ -2,6 +2,9 @@
 
 <p align="center">A specialised help desk for copmanies. A simple app to keep record and track IT department tasks and issues baked using React. Uses JSON-Server as a mock backend. Alot of backedn option to pic from but soon to use Mongo DB.</p>
 
+
+ [![Netlify Status](https://api.netlify.com/api/v1/badges/9fe11148-0c25-4945-879d-c6a8ebd3f5c3/deploy-status)](https://app.netlify.com/sites/help-desk/deploys)
+
 > Under light development feel free to collaborate
 
 ## Getting started
