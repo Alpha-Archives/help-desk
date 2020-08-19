@@ -14,8 +14,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
 
 const App = () => {
-  useEffect(() => {
-    // Init Materialize JS
+  useEffect(() => {    
     M.AutoInit();
   });
   return (

@@ -4,8 +4,8 @@
       "id": 1,
       "message": "Changed network card in server 007",
       "attention": true,
-      "tech": "John Doe",
-      "date": "2019-07-26T10:12:30.119Z"
+      "tech": "Olomi Alpha",
+      "date": "2020-08-18T20:51:01.534Z"
     },
     {
       "id": 2,
@@ -49,6 +49,11 @@
       "firstName": "Alpha",
       "lastName": "OLomi",
       "id": 4
+    },
+    {
+      "firstName": "Olomi",
+      "lastName": "Alpha",
+      "id": 5
     }
   ]
 }
