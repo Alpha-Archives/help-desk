@@ -10,7 +10,7 @@ import {
   CLEAR_CURRENT,
 } from "./types";
 
-import parseJSON from "../utils";
+import { parseJSON } from "../utils";
 
 // export const getLogs = () => {
 //   return async dispatch => {

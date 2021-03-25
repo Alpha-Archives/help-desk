@@ -6,7 +6,7 @@ import {
   TECHS_ERROR,
 } from "./types";
 
-import parseJSON from "../utils";
+import { parseJSON } from "../utils";
 
 // Get techs from server
 export const getTechs = () => async (dispatch) => {
