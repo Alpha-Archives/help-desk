@@ -1,1 +1,1 @@
-export { default as parseJSON } from "/parsejson";
+export { default as parseJSON } from "./parsejson";
