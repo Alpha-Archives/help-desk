@@ -11,7 +11,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  logs: null,
+  logs: logsReducer(undefined, {type: '@@redux/INIT'}),
   current: null,
   loading: false,
   error: null
@@ -22,32 +22,27 @@ export default (state = initialState, action) => {
     case GET_LOGS:
       return {
         ...state,
-        logs: action.payload,
-        loading: false
+        logs: logsReducer(state.logs, action),
       };
     case ADD_LOG:
       return {
         ...state,
-        logs: [...state.logs, action.payload],
-        loading: false
+        logs: logsReducer(state.logs, action),
       };
     case DELETE_LOG:
       return {
         ...state,
-        logs: state.logs.filter(log => log.id !== action.payload),
-        loading: false
+        logs: logsReducer(state.logs, action),
       };
     case UPDATE_LOG:
       return {
         ...state,
-        logs: state.logs.map(log =>
-          log.id === action.payload.id ? action.payload : log
-        )
+        logs: logsReducer(state.logs, action),
       };
     case SEARCH_LOGS:
       return {
         ...state,
-        logs: action.payload
+        logs: logsReducer(state.logs, action),
       };
     case SET_CURRENT:
       return {
@@ -74,3 +69,22 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+function logsReducer(state = [], action) {
+  switch(action.type) {
+    case GET_LOGS:
+      return action.payload
+    case ADD_LOG:
+      return state.concat(action.payload)
+    case DELETE_LOG:
+      return state.filter(log => log.id !== action.id)
+    case UPDATE_LOG: 
+      return state.map(log =>
+        log.id === action.payload.id ? action.payload : log
+      )
+    case SEARCH_LOGS:
+      return action.payload
+    default:
+      return state
+  }
+}
