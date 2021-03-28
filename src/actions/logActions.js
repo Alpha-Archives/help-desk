@@ -1,7 +1,5 @@
 import {
   GET_LOGS,
-  SET_LOADING,
-  LOGS_ERROR,
   ADD_LOG,
   DELETE_LOG,
   UPDATE_LOG,
@@ -9,6 +7,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
 } from "./types";
+
+import {loading, logError} from './commonActions'
 
 import { parseJSON } from "../utils";
 
@@ -29,7 +29,7 @@ import { parseJSON } from "../utils";
 // Get logs from server
 export const getLogs = () => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading());
 
     const res = await fetch("/logs");
     const data = await parseJSON(res);
@@ -39,17 +39,14 @@ export const getLogs = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(logError(err.response.statusText))
   }
 };
 
 // Add new log
 export const addLog = (log) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading());
 
     const res = await fetch("/logs", {
       method: "POST",
@@ -65,17 +62,14 @@ export const addLog = (log) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(logError(err.response.statusText));
   }
 };
 
 // Delete log from server
 export const deleteLog = (id) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading());
 
     await fetch(`/logs/${id}`, {
       method: "DELETE",
@@ -86,17 +80,14 @@ export const deleteLog = (id) => async (dispatch) => {
       payload: id,
     });
   } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(logError(err.response.statusText));
   }
 };
 
 // Update log on server
 export const updateLog = (log) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading());
 
     const res = await fetch(`/logs/${log.id}`, {
       method: "PUT",
@@ -113,17 +104,14 @@ export const updateLog = (log) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(logError(err.response.statusText));
   }
 };
 
 // Search server logs
 export const searchLogs = (text) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading());
 
     const res = await fetch(`/logs?q=${text}`);
     const data = await parseJSON(res);
@@ -133,10 +121,7 @@ export const searchLogs = (text) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(logError(err.response.statusText));
   }
 };
 
@@ -152,12 +137,5 @@ export const setCurrent = (log) => {
 export const clearCurrent = () => {
   return {
     type: CLEAR_CURRENT,
-  };
-};
-
-// Set loading to true
-export const setLoading = () => {
-  return {
-    type: SET_LOADING,
   };
 };
