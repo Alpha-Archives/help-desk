@@ -1,4 +1,4 @@
-import {SET_LOADING, LOGS_ERROR} from './types'
+import {SET_LOADING, LOGS_ERROR, TECHS_ERROR} from './types'
 
 export const loading = () => ({
     type: SET_LOADING
@@ -10,6 +10,6 @@ export const logError = (err) => ({
 })
 
 export const techError = (err) => ({
-    type: LOGS_ERROR,
+    type: TECHS_ERROR,
     payload: err
 })
