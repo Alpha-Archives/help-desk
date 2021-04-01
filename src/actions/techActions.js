@@ -2,16 +2,16 @@ import {
   GET_TECHS,
   ADD_TECH,
   DELETE_TECH,
-  SET_LOADING,
-  TECHS_ERROR,
 } from "./types";
+
+import {loading, techError} from './commonActions'
 
 import { parseJSON } from "../utils";
 
 // Get techs from server
 export const getTechs = () => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading())
 
     const res = await fetch("/techs");
     const data = await parseJSON(res);
@@ -21,17 +21,14 @@ export const getTechs = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: TECHS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(techError(err.response.statusText))
   }
 };
 
 // Add technician to server
 export const addTech = (tech) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading())
 
     const res = await fetch("/techs", {
       method: "POST",
@@ -47,16 +44,13 @@ export const addTech = (tech) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    dispatch({
-      type: TECHS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(techError(err.response.statusText));
   }
 };
 
 export const deleteTech = (id) => async (dispatch) => {
   try {
-    setLoading();
+    dispatch(loading())
 
     await fetch(`/techs/${id}`, {
       method: "DELETE",
@@ -67,16 +61,6 @@ export const deleteTech = (id) => async (dispatch) => {
       payload: id,
     });
   } catch (err) {
-    dispatch({
-      type: TECHS_ERROR,
-      payload: err.response.statusText,
-    });
+    dispatch(techError(err.response.statusText));
   }
-};
-
-// Set loading to true
-export const setLoading = () => {
-  return {
-    type: SET_LOADING,
-  };
 };
