@@ -7,7 +7,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  techs: null,
+  techs: techReducer(undefined, {type: '@@redux/INIT'}),
   loading: false,
   error: null
 };
@@ -17,20 +17,17 @@ export default (state = initialState, action) => {
     case GET_TECHS:
       return {
         ...state,
-        techs: action.payload,
-        loading: false
+        techs: techReducer(state.techs, action),
       };
     case ADD_TECH:
       return {
         ...state,
-        techs: [...state.techs, action.payload],
-        loading: false
+        techs: techReducer(state.techs, action),
       };
     case DELETE_TECH:
       return {
         ...state,
-        techs: state.techs.filter(tech => tech.id !== action.payload),
-        loading: false
+        techs: techReducer(state.techs, action),
       };
     case SET_LOADING:
       return {
@@ -42,9 +39,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
-        loading: false
       };
     default:
       return state;
   }
 };
+
+function techReducer(state = [], action) {
+  switch(action.type) {
+    case GET_TECHS:
+      return action.payload
+    case ADD_TECH:
+      return state.concat(action.payload)
+    case DELETE_TECH:
+      return state.filter(tech => tech.id !== action.payload)
+    default:
+      return state
+  }
+}
